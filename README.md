@@ -61,6 +61,10 @@ typedef struct instruction_s
 - Any output must be printed on stdout
 - Any error message must be printed on stderr
 
+## Tests
+
+We strongly encourage you to work on a set of tests.
+
 > The Monty language
 Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python). <br/>
 It relies on a unique stack, with specific instructions to manipulate it. The goal of this project is <br/> 
