@@ -15,48 +15,79 @@
 void push(stack_t **stack, unsigned int line_cnt)
 {
 	char *n = global.argument;
-	char *endptr;
 	long int num;
 
 	errno = 0; /* Reset errno before the call */
+	num = validate_input(n, line_cnt);
+
+	if (global.data_struct == 1)
+	{
+		if (!add_node(stack, (int)num))
+			handle_add_error(line_cnt);
+	}
+	else
+	{
+		if (!queue_node(stack, (int)num))
+			handle_queue_error(line_cnt);
+	}
+}
+
+/**
+ * validate_input - validate input string and convert it to integer
+ * @n: input string
+ * @line_cnt: line number
+ *
+ * Return: converted integer
+ */
+long int validate_input(char *n, unsigned int line_cnt)
+{
+	char *endptr;
+	long int num;
 
 	num = strtol(n, &endptr, 10);
 
-	/* Check for conversion errors */
-	if ((errno == ERANGE && (num == LONG_MAX || num == LONG_MIN)) || (errno != 0 && num == 0))
+	if ((errno == ERANGE && (num == LONG_MAX || num == LONG_MIN)) ||
+		(errno != 0 && num == 0))
 	{
 		fprintf(stderr, "L%d: conversion error: %s\n", line_cnt, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
-	/* Check if the entire string was converted */
 	if (endptr == n || *endptr != '\0')
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
 		exit(EXIT_FAILURE);
 	}
 
-	/* Check for integer overflow or underflow */
 	if (num > INT_MAX || num < INT_MIN)
 	{
 		fprintf(stderr, "L%d: push value exceeds integer limits\n", line_cnt);
 		exit(EXIT_FAILURE);
 	}
 
-	/* Add the integer to the stack or queue */
-	if (global.data_struct == 1)
-	{
-		if (!add_node(stack, (int)num))
-		{
-			fprintf(stderr, "L%d: failed to add node to stack\n", line_cnt);
-			exit(EXIT_FAILURE);
-		}
-	} else
-	{
-		if (!queue_node(stack, (int)num))
-		{
-			fprintf(stderr, "L%d: failed to add node to queue\n", line_cnt);
-			exit(EXIT_FAILURE);
-		}
-	}
+	return (num);
+}
+
+/**
+ * handle_add_error - handle error when adding node to stack
+ * @line_cnt: line number
+ *
+ * Return: void
+ */
+void handle_add_error(unsigned int line_cnt)
+{
+	fprintf(stderr, "L%d: failed to add node to stack\n", line_cnt);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * handle_queue_error - handle error when adding node to queue
+ * @line_cnt: line number
+ *
+ * Return: void
+ */
+void handle_queue_error(unsigned int line_cnt)
+{
+	fprintf(stderr, "L%d: failed to add node to queue\n", line_cnt);
+	exit(EXIT_FAILURE);
 }

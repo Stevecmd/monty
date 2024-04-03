@@ -130,7 +130,9 @@ void pall(stack_t **stack, unsigned int line_cnt __attribute__((unused)));
 
 /* stack_push.c */
 void push(stack_t **stack, unsigned int line_cnt);
-
+long int validate_input(char *n, unsigned int line_cnt);
+void handle_add_error(unsigned int line_cnt);
+void handle_queue_error(unsigned int line_cnt);
 
 /* stack_rotate_left.c */
 void rotl(stack_t **stack, unsigned int line_cnt);
