@@ -70,33 +70,87 @@ typedef struct help
 } help;
 extern help global;
 
-/* stack utility functions available in linked_list.c */
-stack_t *add_node(stack_t **stack, const int n);
-stack_t *queue_node(stack_t **stack, const int n);
-void free_stack(stack_t *stack);
-size_t print_stack(const stack_t *stack);
 
-void push(stack_t **stack, unsigned int line_cnt);
-void pall(stack_t **stack, unsigned int line_cnt);
-void pint(stack_t **stack, unsigned int line_cnt);
-void swap(stack_t **stack, unsigned int line_cnt);
-void pop(stack_t **stack, unsigned int line_cnt);
-void nop(stack_t **stack, unsigned int line_cnt);
+/* monty_main.c */
+int main(int argc, char **argv);
+void file_error(char *argv);
+void error_usage(void);
 
-void _div(stack_t **stack, unsigned int line_cnt);
-void _add(stack_t **stack, unsigned int line_cnt);
-void _sub(stack_t **stack, unsigned int line_cnt);
-void _mul(stack_t **stack, unsigned int line_cnt);
-void mod(stack_t **stack, unsigned int line_cnt);
 
-void pchar(stack_t **stack, unsigned int line_cnt);
-void pstr(stack_t **stack, unsigned int line_cnt);
-void rotl(stack_t **stack, unsigned int line_cnt);
-void rotr(stack_t **stack, unsigned int line_cnt);
-
+/* opcode.c */
 void opcode(stack_t **stack, char *str, unsigned int line_cnt);
 
+
+/* stack_add.c */
+void _add(stack_t **stack, unsigned int line_cnt);
+
+
+/*stack_division.c */
+void _div(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_modulus.c */
+void mod(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_multiplications.c */
+void _mul(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_nop.c */
+void nop(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_operations.c */
+stack_t *queue_node(stack_t **stack, const int n);
+stack_t *add_node(stack_t **stack, const int n);
+size_t print_stack(const stack_t *stack);
+void free_stack(stack_t *stack);
+
+
+/* stack_pchar.c */
+void pchar(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_pint.c */
+void pint(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_pop.c */
+void pop(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_print_string.c */
+void pstr(stack_t **stack, unsigned int line_cnt __attribute__((unused)));
+
+
+/* stack_print.c */
+void pall(stack_t **stack, unsigned int line_cnt __attribute__((unused)));
+
+
+/* stack_push.c */
+void push(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_rotate_left.c */
+void rotl(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_rotate_right.c */
+void rotr(stack_t **stack, unsigned int line_cnt);
+
+
+/* stack_subtract.c */
+void _sub(stack_t **stack, unsigned int line_cnt);
+
+
+/* string_checks.c */
 int is_digit(char *string);
 int isnumber(char *str);
+
+
+/* swap.c */
+void swap(stack_t **stack, unsigned int line_cnt);
+
 
 #endif /* MONTY_H */

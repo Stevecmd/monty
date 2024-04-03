@@ -11,21 +11,22 @@
  */
 void _div(stack_t **stack, unsigned int line_cnt)
 {
-    int result;
+	int result;
 
-    if (!stack || !*stack || !((*stack)->next))
-    {
-        fprintf(stderr, "L%d: can't div, stack has less than two elements\n", line_cnt);
-        exit(EXIT_FAILURE);
-    }
+	if (!stack || !*stack || !((*stack)->next))
+	{
+		fprintf(stderr, "L%d: can't div, stack has less than two elements\n",
+				line_cnt);
+		exit(EXIT_FAILURE);
+	}
 
-    if ((*stack)->n == 0)
-    {
-        fprintf(stderr, "L%d: division by zero is not allowed\n", line_cnt);
-        exit(EXIT_FAILURE);
-    }
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero is not allowed\n", line_cnt);
+		exit(EXIT_FAILURE);
+	}
 
-    result = ((*stack)->next->n) / ((*stack)->n);
-    pop(stack, line_cnt); /* For top node */
-    (*stack)->n = result;
+	result = ((*stack)->next->n) / ((*stack)->n);
+	pop(stack, line_cnt); /* For top node */
+	(*stack)->n = result;
 }
