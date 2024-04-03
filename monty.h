@@ -1,5 +1,5 @@
-#ifndef MONTY_H
-#define MONTY_H
+#ifndef __MONTY_H__
+#define __MONTY_H__
 
 #include <stddef.h>
 #include <stdlib.h>
@@ -155,4 +155,4 @@ int isnumber(char *str);
 void swap(stack_t **stack, unsigned int line_cnt);
 
 
-#endif /* MONTY_H */
+#endif /* __MONTY_H__ */
