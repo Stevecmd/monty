@@ -17,7 +17,7 @@ void push(stack_t **stack, unsigned int line_cnt)
 	char *n = global.argument;
 	long int num;
 
-	errno = 0; /* Reset errno before the call */
+	errno = 0;
 	num = validate_input(n, line_cnt);
 
 	if (global.data_struct == 1)
@@ -44,24 +44,18 @@ long int validate_input(char *n, unsigned int line_cnt)
 	char *endptr;
 	long int num;
 
-	num = strtol(n, &endptr, 10);
-
-	if ((errno == ERANGE && (num == LONG_MAX || num == LONG_MIN)) ||
-		(errno != 0 && num == 0))
-	{
-		fprintf(stderr, "L%d: conversion error: %s\n", line_cnt, strerror(errno));
-		exit(EXIT_FAILURE);
-	}
-
-	if (endptr == n || *endptr != '\0')
+	if (!n || *n == '\0')
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
 		exit(EXIT_FAILURE);
 	}
 
-	if (num > INT_MAX || num < INT_MIN)
+	errno = 0;
+	num = strtol(n, &endptr, 10);
+
+	if (errno != 0 || *endptr != '\0')
 	{
-		fprintf(stderr, "L%d: push value exceeds integer limits\n", line_cnt);
+		fprintf(stderr, "L%d: usage: push integer\n", line_cnt);
 		exit(EXIT_FAILURE);
 	}
 
