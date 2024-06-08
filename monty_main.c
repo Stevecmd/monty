@@ -30,7 +30,6 @@ int main(int argc, char **argv)
 		error_usage();
 
 	file = fopen(argv[1], "r");
-
 	if (!file)
 		file_error(argv[1]);
 
