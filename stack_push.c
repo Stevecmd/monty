@@ -17,7 +17,7 @@ void push(stack_t **stack, unsigned int line_cnt)
 	char *n = global.argument;
 	long int num;
 
-	errno = 0;
+	errno = 0; /* Reset errno before the call */
 	num = validate_input(n, line_cnt);
 
 	if (global.data_struct == 1)
@@ -30,6 +30,9 @@ void push(stack_t **stack, unsigned int line_cnt)
 		if (!queue_node(stack, (int)num))
 			handle_queue_error(line_cnt);
 	}
+
+	/* After pushing, print the stack */
+	pall(stack, line_cnt);
 }
 
 /**
