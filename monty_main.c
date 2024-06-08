@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 			line_cnt++;
 			continue;
 		}
+		buffer[strcspn(buffer, "\n")] = '\0';
 		str = strtok(buffer, " \t\n");
 		if (!str || *str == '#')
 		{
